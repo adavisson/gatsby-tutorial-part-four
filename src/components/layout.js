@@ -1,9 +1,20 @@
 import React from "react"
 import { css } from "@emotion/core"
-import { Link } from "gatsby"
+import { useStaticQuery, Link, graphql } from "gatsby"
 import { rhythm } from "../utils/typography"
 
 const Layout = ({ children }) => {
+  const data = useStaticQuery(
+    graphql`
+      query {
+        site {
+          siteMetadata {
+            title
+          }
+        }
+      }
+    `
+  )
   return (
     <div
       css={css`
@@ -21,7 +32,7 @@ const Layout = ({ children }) => {
             font-style: normal;
           `}
         >
-          Pandas Eating Lots
+          {data.site.siteMetadata.title}
         </h3>
       </Link>
       <Link
